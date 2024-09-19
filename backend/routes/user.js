@@ -3,6 +3,7 @@ const { User } = require("../db");
 const zod = require("zod");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
+const { authMiddleware } = require("../middleware");
 
 const userRouter = express.Router();
 
@@ -99,6 +100,54 @@ userRouter.post("/signin", async (req, res) => {
 
   res.status(200).json({
     token,
+  });
+});
+
+// Update the user info..
+const updatedBody = zod.object({
+  password: zod.string().optional(),
+  firstName: zod.string().optional(),
+  lastName: zod.string().optional(),
+});
+
+// use middleware with the routing...
+userRouter.put("/user", authMiddleware, async (req, res) => {
+  const { success } = updatedBody.safeParse(req.body);
+
+  if (!success) {
+    res.status(411).json({
+      message: "Error while updating the information",
+    });
+  }
+
+  // getting the userId from the middleware
+  await User.updateOne(
+    {
+      _id: req.userId,
+    },
+    req.body
+  );
+});
+
+// Get the users from backend, filterable via firstName/lastName with query param
+userRouter.get("/user/bulk", async (req, res) => {
+  const param = req.query.filter || "";
+
+  const users = await User.find({
+    $or: [
+      {
+        firstName: {
+          $regex: param,
+        },
+        lastName: {
+          $regex: param,
+        },
+      },
+    ],
+  });
+
+  res.status(200).json({
+    users,
   });
 });
 
