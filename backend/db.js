@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 mongoose.connect(
-  "mongodb+srv://user:<db_password>@cluster0.ovrlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  "mongodb+srv://user:<db_password>@cluster0.ovrlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&replicaSet=rs"
 );
 
 const userSchema = new Schema({
