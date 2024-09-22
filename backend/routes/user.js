@@ -10,13 +10,13 @@ const userRouter = express.Router();
 // Signup router
 const signupBody = zod.object({
   username: zod.string().email(),
-  firstname: zod.string(),
-  lastname: zod.string(),
-  password: zod.string(),
+  firstName: zod.string(),
+  lastName: zod.string(),
+  password: zod.string().min(6),
 });
 
 userRouter.post("/signup", async (req, res) => {
-  const { success } = signupBody.safeParse(req.body);
+  const { success, error } = signupBody.safeParse(req.body);
 
   //   Check Zod validation is success or not..
   if (!success) {
@@ -48,7 +48,7 @@ userRouter.post("/signup", async (req, res) => {
   const userID = user._id;
 
   await Account.create({
-    userId,
+    userId: userID,
     balance: 1 * Math.random() * 10000,
   });
 

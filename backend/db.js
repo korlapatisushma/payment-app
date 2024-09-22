@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 mongoose.connect(
-  "mongodb+srv://user:<db_password>@cluster0.ovrlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&replicaSet=rs"
+  "mongodb+srv://user:1234@cluster0.ovrlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 );
 
 const userSchema = new Schema({
@@ -23,7 +23,7 @@ const userSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    trime: true,
+    trim: true,
     minLength: 1,
     maxLength: 50,
   },
