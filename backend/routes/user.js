@@ -135,7 +135,7 @@ userRouter.put("/user", authMiddleware, async (req, res) => {
 });
 
 // Get the users from backend, filterable via firstName/lastName with query param
-userRouter.get("/user/bulk", async (req, res) => {
+userRouter.get("/bulk", async (req, res) => {
   const param = req.query.filter || "";
 
   const users = await User.find({

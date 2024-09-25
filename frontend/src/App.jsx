@@ -4,17 +4,11 @@ import { Signup } from "./pages/Signup";
 import { Signin } from "./pages/Signin";
 import { Dashboard } from "./pages/Dashboard";
 import { SendMoney } from "./pages/SendMoney";
-import { Appbar } from "./components/Appbar";
-import { Balance } from "./components/Balance";
-import { Users } from "./components/Users";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Appbar />
-        <Balance />
-        <Users />
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
