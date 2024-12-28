@@ -56,7 +56,8 @@ userRouter.post("/signup", async (req, res) => {
     {
       userID,
     },
-    JWT_SECRET
+    JWT_SECRET,
+    { expiresIn: "1h" }
   );
 
   res.json({
@@ -116,7 +117,7 @@ const updatedBody = zod.object({
 });
 
 // use middleware with the routing...
-userRouter.put("/user", authMiddleware, async (req, res) => {
+userRouter.put("/update", authMiddleware, async (req, res) => {
   const { success } = updatedBody.safeParse(req.body);
 
   if (!success) {

@@ -5,13 +5,29 @@ const { authMiddleware } = require("../middleware");
 
 const accountRouter = express.Router();
 
+// update the balance
+accountRouter.put("/funds", authMiddleware, async (req, res) => {
+  const { amount } = req.body;
+
+  const updatedBalance = await Account.updateOne(
+    { userId: req.userId },
+    { $set: { balance: amount } }
+  );
+
+  if (updatedBalance.modifiedCount === 1) {
+    res.status(200).json({ message: "Balance updated successfully." });
+  } else {
+    res.status(404).json({ message: "Can't update the balance." });
+  }
+});
+
 // End point to get the balance of an User...
 accountRouter.get("/balance", authMiddleware, async (req, res) => {
-  const { balance } = await Account.findOne({
+  const account = await Account.findOne({
     userId: req.userId,
   });
   res.status(200).json({
-    balance,
+    balance: account.balance,
   });
 });
 
