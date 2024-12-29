@@ -4,7 +4,7 @@ export function SearchBox({ setFilter }) {
       <input
         type="text"
         className="border rounded-sm pl-2 border-slate-200 w-full"
-        placeholder="Search Users..."
+        placeholder="Search Friends..."
         onChange={(e) => setFilter(e.target.value)}
       />
     </div>

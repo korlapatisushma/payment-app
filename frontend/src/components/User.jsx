@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export function User({ firstName, lastName }) {
+export function User({ firstName, lastName, userId }) {
   const navigate = useNavigate();
   return (
     <div className="flex justify-between my-4">
@@ -15,7 +15,9 @@ export function User({ firstName, lastName }) {
         <button
           className="rounded-lg bg-slate-800 text-white font-small text-sm px-2"
           onClick={() =>
-            navigate("/send", { state: `${firstName} ${lastName}` })
+            navigate("/send", {
+              state: { fullName: `${firstName} ${lastName}`, userId: userId },
+            })
           }
         >
           {"Send Money"}

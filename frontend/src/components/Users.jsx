@@ -17,10 +17,10 @@ export function Users() {
       .then((response) => {
         setUsers(response.data.users);
       });
-  });
+  }, [filter]);
   return (
-    <div className="flex flex-col mx-4">
-      <div className="text-xl font-bold my-2">Users</div>
+    <div className="flex flex-col mx-4 w-3/4">
+      <div className="text-xl font-bold my-2">Friends</div>
       <SearchBox setFilter={setFilter} />
       <div className="mt-4">
         {users.map((user) => (
@@ -28,6 +28,7 @@ export function Users() {
             key={user._id}
             firstName={user.firstName}
             lastName={user.lastName}
+            userId={user._id}
           />
         ))}
       </div>

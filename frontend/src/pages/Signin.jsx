@@ -15,16 +15,15 @@ export function Signin() {
   const navigate = useNavigate();
 
   const handleSignIn = () => {
-    console.log(username, password, "Conso;e");
     axios
       .post("http://localhost:3000/api/v1/user/signin", {
         username,
         password,
       })
       .then((response) => {
-        console.log("inside");
         localStorage.setItem("token", response.data.token);
-        navigate("/dashboard", { state: username });
+        localStorage.setItem("username", username);
+        navigate("/dashboard");
       })
       .catch((e) => console.log(e));
   };
@@ -35,10 +34,16 @@ export function Signin() {
       <Subheading label={"Enter your credentials to access account"} />
       <InputBox
         name={"Email"}
+        type={"text"}
         placeholder={"John.doe@gmail.com"}
         setText={setUsername}
       />
-      <InputBox name={"Password"} placeholder={"12345"} setText={setPassword} />
+      <InputBox
+        name={"Password"}
+        type={"password"}
+        placeholder={"12345"}
+        setText={setPassword}
+      />
       <Button label={"Sign In"} onClick={handleSignIn} />
       <BottomMessage
         label={"Don't have an account?"}

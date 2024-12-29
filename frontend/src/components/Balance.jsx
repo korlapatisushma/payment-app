@@ -12,7 +12,6 @@ export function Balance() {
         },
       })
       .then((response) => {
-        // console.log(response.data.balance.split(".")[1]);
         setBalance(response.data.balance);
       });
   });

@@ -144,9 +144,13 @@ userRouter.get("/bulk", async (req, res) => {
       {
         firstName: {
           $regex: param,
+          $options: "i",
         },
+      },
+      {
         lastName: {
           $regex: param,
+          $options: "i",
         },
       },
     ],
