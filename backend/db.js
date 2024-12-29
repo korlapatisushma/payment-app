@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
+
+require("dotenv").config();
 const { Schema, model } = mongoose;
 
-mongoose.connect(
-  "mongodb+srv://user:1234@cluster0.ovrlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-);
+mongoose.connect(process.env.DB_URL);
 
 const userSchema = new Schema({
   username: {
