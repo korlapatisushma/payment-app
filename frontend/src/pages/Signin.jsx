@@ -8,6 +8,8 @@ import { Subheading } from "../components/Subheading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+
 export function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +18,7 @@ export function Signin() {
 
   const handleSignIn = () => {
     axios
-      .post("http://localhost:3000/api/v1/user/signin", {
+      .post(`${API_ENDPOINT}/api/v1/user/signin`, {
         username,
         password,
       })

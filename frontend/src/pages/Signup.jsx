@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export function Signup() {
+  const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -18,7 +19,7 @@ export function Signup() {
 
   const handleSignUp = () => {
     axios
-      .post("http://localhost:3000/api/v1/user/signup", {
+      .post(`${API_ENDPOINT}/api/v1/user/signup`, {
         username,
         firstName,
         lastName,

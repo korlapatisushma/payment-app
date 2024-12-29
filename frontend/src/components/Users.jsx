@@ -3,13 +3,15 @@ import { SearchBox } from "./SearchBox";
 import { User } from "./User";
 import axios from "axios";
 
+const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+
 export function Users() {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/v1/user/bulk?filter=" + filter, {
+      .get(`${API_ENDPOINT}/api/v1/user/bulk?filter=` + filter, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

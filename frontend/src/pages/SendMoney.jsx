@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { MdDone } from "react-icons/md";
 
+const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+
 export function SendMoney() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ export function SendMoney() {
   const handleTransfer = () => {
     axios
       .post(
-        "http://localhost:3000/api/v1/account/transfer",
+        `${API_ENDPOINT}/api/v1/account/transfer`,
         {
           to: location.state.userId,
           amount,
